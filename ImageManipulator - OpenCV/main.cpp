@@ -1,8 +1,4 @@
 #include "ImageManipulator.h"
-#include <iostream>
-#include <string>
-
-using namespace std;
 
 void displayMenu() {
     cout << "\n========== Image Manipulator Menu ==========" << endl;
@@ -142,6 +138,6 @@ int main() {
         }
     }
 
-    cv::destroyAllWindows();
+    destroyAllWindows();
     return 0;
 }
