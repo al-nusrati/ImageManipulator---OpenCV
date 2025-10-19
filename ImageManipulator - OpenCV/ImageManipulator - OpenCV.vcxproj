@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ImageManipulator - OpenCV.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="ImageManipulator.cpp" />
   </ItemGroup>
   <ItemGroup>
