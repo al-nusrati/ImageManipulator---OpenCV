@@ -40,6 +40,7 @@ void ImageManipulator::displayOriginal() const {
         std::cerr << "Error: No image loaded!" << std::endl;
         return;
     }
+    cv::namedWindow("Original Image", cv::WINDOW_NORMAL); // ADD THIS LINE
     cv::imshow("Original Image", originalImage);
     cv::waitKey(0);
 }
@@ -50,6 +51,7 @@ void ImageManipulator::displayProcessed(const std::string& windowName) const {
         std::cerr << "Error: No processed image available!" << std::endl;
         return;
     }
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL); // ADD THIS LINE
     cv::imshow(windowName, processedImage);
     cv::waitKey(0);
 }

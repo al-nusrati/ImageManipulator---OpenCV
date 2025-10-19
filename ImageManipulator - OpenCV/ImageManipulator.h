@@ -1,44 +1,45 @@
 #include <opencv2/opencv.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
 #include <string>
 #include <iostream>
 
+using namespace cv;
+using namespace std;
+
 class ImageManipulator {
 private:
-    cv::Mat originalImage;
-    cv::Mat processedImage;
-    std::string imagePath;
+    Mat originalImage;
+    Mat processedImage;
+    string imagePath;
 
 public:
     // Constructors
     ImageManipulator();
-    ImageManipulator(const std::string& path);
+    ImageManipulator(const string& path);
 
     // Destructor
     ~ImageManipulator();
 
     // Image Loading
-    bool loadImage(const std::string& path);
+    bool loadImage(const string& path);
 
     // Display methods
     void displayOriginal() const;
-    void displayProcessed(const std::string& windowName = "Processed Image") const;
+    void displayProcessed(const string& windowName = "Processed Image") const;
 
     // Contrast Enhancement (Manual implementation - NO convertTo)
-    cv::Mat enhanceContrast(double alpha, double beta);
+    Mat enhanceContrast(double alpha, double beta);
 
     // Image Rotation
-    cv::Mat rotateImage(int angle);
+    Mat rotateImage(int angle);
 
     // Image Flipping
-    cv::Mat flipImage(int flipCode);
+    Mat flipImage(int flipCode);
 
     // Utility methods
-    cv::Mat getOriginalImage() const;
-    cv::Mat getProcessedImage() const;
+    Mat getOriginalImage() const;
+    Mat getProcessedImage() const;
     bool isImageLoaded() const;
 
     // Save processed image
-    bool saveImage(const std::string& outputPath) const;
+    bool saveImage(const string& outputPath) const;
 };
