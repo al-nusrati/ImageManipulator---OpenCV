@@ -327,9 +327,9 @@ This project is for educational purposes as part of an academic assignment.
 
 ## ✍️ Author
 
-**[Your Name]**  
-**Roll Number:** [Your Roll Number]  
-**Course:** Image Processing / Computer Vision  
+**Jawad Ahmed**  
+**Roll Number:** 533047 
+**Course:** Object Oriented Programming 
 **Assignment:** Assignment 2 - Image Manipulation using OpenCV
 
 ---
