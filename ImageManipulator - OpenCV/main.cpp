@@ -4,9 +4,9 @@ void displayMenu() {
     cout << "\n========== Image Manipulator Menu ==========" << endl;
     cout << "1. Display Original Image" << endl;
     cout << "2. Enhance Contrast" << endl;
-    cout << "3. Rotate Image (90° Clockwise)" << endl;
-    cout << "4. Rotate Image (180°)" << endl;
-    cout << "5. Rotate Image (270° Clockwise)" << endl;
+    cout << "3. Rotate Image (90-Degree Clockwise)" << endl;
+    cout << "4. Rotate Image (180-Degree)" << endl;
+    cout << "5. Rotate Image (270-Degree Clockwise)" << endl;
     cout << "6. Flip Horizontally" << endl;
     cout << "7. Flip Vertically" << endl;
     cout << "8. Flip Both Directions" << endl;
@@ -21,7 +21,6 @@ int main() {
 
     cout << "========================================" << endl;
     cout << "  Image Manipulation using OpenCV" << endl;
-    cout << "  Assignment 2" << endl;
     cout << "========================================" << endl;
     cout << "\nEnter image path: ";
     getline(cin, imagePath);
