@@ -184,20 +184,3 @@ Mat ImageManipulator::getProcessedImage() const {
 bool ImageManipulator::isImageLoaded() const {
     return !originalImage.empty();
 }
-
-// Save Processed Image
-bool ImageManipulator::saveImage(const string& outputPath) const {
-    if (processedImage.empty()) {
-        cerr << "Error: No processed image to save!" << endl;
-        return false;
-    }
-
-    bool success = imwrite(outputPath, processedImage);
-    if (success) {
-        cout << "Image saved to " << outputPath << endl;
-    }
-    else {
-        cerr << "Error: Could not save image!" << endl;
-    }
-    return success;
-}
