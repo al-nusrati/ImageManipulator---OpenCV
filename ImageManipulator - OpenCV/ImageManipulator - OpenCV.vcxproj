@@ -128,6 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ImageManipulator - OpenCV.cpp" />
+    <ClCompile Include="ImageManipulator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageManipulator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
