@@ -1,6 +1,3 @@
-#ifndef IMAGE_MANIPULATOR_H
-#define IMAGE_MANIPULATOR_H
-
 #include <opencv2/opencv.hpp>
 #include <string>
 #include <iostream>
@@ -43,5 +40,3 @@ public:
     Mat getProcessedImage() const;
     bool isImageLoaded() const;
 };
-
-#endif // IMAGE_MANIPULATOR_H
