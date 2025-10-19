@@ -10,8 +10,7 @@ void displayMenu() {
     cout << "6. Flip Horizontally" << endl;
     cout << "7. Flip Vertically" << endl;
     cout << "8. Flip Both Directions" << endl;
-    cout << "9. Save Processed Image" << endl;
-    cout << "10. Load New Image" << endl;
+    cout << "9. Load New Image" << endl;
     cout << "0. Exit" << endl;
     cout << "============================================" << endl;
     cout << "Enter your choice: ";
@@ -104,15 +103,6 @@ int main() {
         }
 
         case 9: {
-            string outputPath;
-            cin.ignore(); // Clear input buffer
-            cout << "\nEnter output file path (e.g., output.jpg): ";
-            getline(cin, outputPath);
-            manipulator.saveImage(outputPath);
-            break;
-        }
-
-        case 10: {
             cin.ignore(); // Clear input buffer
             cout << "\nEnter new image path: ";
             getline(cin, imagePath);
