@@ -2,12 +2,12 @@
 
 // Default Constructor
 ImageManipulator::ImageManipulator() : imagePath("") {
-    std::cout << "ImageManipulator object created." << std::endl;
+    cout << "ImageManipulator object created." << endl;
 }
 
 // Parameterized Constructor
-ImageManipulator::ImageManipulator(const std::string& path) : imagePath(path) {
-    std::cout << "ImageManipulator object created." << std::endl;
+ImageManipulator::ImageManipulator(const string& path) : imagePath(path) {
+    cout << "ImageManipulator object created." << endl;
     loadImage(path);
 }
 
@@ -15,56 +15,60 @@ ImageManipulator::ImageManipulator(const std::string& path) : imagePath(path) {
 ImageManipulator::~ImageManipulator() {
     originalImage.release();
     processedImage.release();
-    std::cout << "ImageManipulator object destroyed." << std::endl;
+    cout << "ImageManipulator object destroyed." << endl;
 }
 
 // Load Image
-bool ImageManipulator::loadImage(const std::string& path) {
-    originalImage = cv::imread(path);
+bool ImageManipulator::loadImage(const string& path) {
+    originalImage = imread(path);
 
     if (originalImage.empty()) {
-        std::cerr << "Error: Could not load image from " << path << std::endl;
+        cerr << "Error: Could not load image from " << path << endl;
         return false;
     }
 
     imagePath = path;
-    std::cout << "Image loaded successfully!" << std::endl;
-    std::cout << "Image size: " << originalImage.cols << "x" << originalImage.rows << std::endl;
-    std::cout << "Channels: " << originalImage.channels() << std::endl;
+    cout << "Image loaded successfully!" << endl;
+    cout << "Image size: " << originalImage.cols << "x" << originalImage.rows << endl;
+    cout << "Channels: " << originalImage.channels() << endl;
     return true;
 }
 
-// Display Original Image
+// Display Original Image (FIXED WINDOW SIZE)
 void ImageManipulator::displayOriginal() const {
     if (originalImage.empty()) {
-        std::cerr << "Error: No image loaded!" << std::endl;
+        cerr << "Error: No image loaded!" << endl;
         return;
     }
-    cv::namedWindow("Original Image", cv::WINDOW_NORMAL); // ADD THIS LINE
-    cv::imshow("Original Image", originalImage);
-    cv::waitKey(0);
+
+    namedWindow("Original Image", WINDOW_NORMAL);
+    resizeWindow("Original Image", 800, 600);
+    imshow("Original Image", originalImage);
+    waitKey(0);
 }
 
-// Display Processed Image
-void ImageManipulator::displayProcessed(const std::string& windowName) const {
+// Display Processed Image (FIXED WINDOW SIZE)
+void ImageManipulator::displayProcessed(const string& windowName) const {
     if (processedImage.empty()) {
-        std::cerr << "Error: No processed image available!" << std::endl;
+        cerr << "Error: No processed image available!" << endl;
         return;
     }
-    cv::namedWindow(windowName, cv::WINDOW_NORMAL); // ADD THIS LINE
-    cv::imshow(windowName, processedImage);
-    cv::waitKey(0);
+
+    namedWindow(windowName, WINDOW_NORMAL);
+    resizeWindow(windowName, 800, 600);
+    imshow(windowName, processedImage);
+    waitKey(0);
 }
 
 // Enhance Contrast - MANUAL IMPLEMENTATION (NO convertTo)
-cv::Mat ImageManipulator::enhanceContrast(double alpha, double beta) {
+Mat ImageManipulator::enhanceContrast(double alpha, double beta) {
     if (originalImage.empty()) {
-        std::cerr << "Error: No image loaded!" << std::endl;
-        return cv::Mat();
+        cerr << "Error: No image loaded!" << endl;
+        return Mat();
     }
 
     // Create output image with same size and type
-    processedImage = cv::Mat::zeros(originalImage.size(), originalImage.type());
+    processedImage = Mat::zeros(originalImage.size(), originalImage.type());
 
     // Manual pixel-by-pixel manipulation
     // Formula: new_pixel = alpha * old_pixel + beta
@@ -85,8 +89,8 @@ cv::Mat ImageManipulator::enhanceContrast(double alpha, double beta) {
             }
             else if (originalImage.channels() == 3) {
                 // Color image (3 channels - BGR)
-                cv::Vec3b pixel = originalImage.at<cv::Vec3b>(row, col);
-                cv::Vec3b newPixel;
+                Vec3b pixel = originalImage.at<Vec3b>(row, col);
+                Vec3b newPixel;
 
                 // Process each channel (B, G, R)
                 for (int c = 0; c < 3; c++) {
@@ -99,55 +103,55 @@ cv::Mat ImageManipulator::enhanceContrast(double alpha, double beta) {
                     newPixel[c] = static_cast<uchar>(newValue);
                 }
 
-                processedImage.at<cv::Vec3b>(row, col) = newPixel;
+                processedImage.at<Vec3b>(row, col) = newPixel;
             }
         }
     }
 
-    std::cout << "Contrast enhanced with alpha=" << alpha << ", beta=" << beta << std::endl;
+    cout << "Contrast enhanced with alpha=" << alpha << ", beta=" << beta << endl;
     return processedImage;
 }
 
 // Rotate Image
-cv::Mat ImageManipulator::rotateImage(int angle) {
+Mat ImageManipulator::rotateImage(int angle) {
     if (originalImage.empty()) {
-        std::cerr << "Error: No image loaded!" << std::endl;
-        return cv::Mat();
+        cerr << "Error: No image loaded!" << endl;
+        return Mat();
     }
 
-    cv::RotateFlags rotateCode;
+    RotateFlags rotateCode;
 
     switch (angle) {
     case 90:
-        rotateCode = cv::ROTATE_90_CLOCKWISE;
+        rotateCode = ROTATE_90_CLOCKWISE;
         break;
     case 180:
-        rotateCode = cv::ROTATE_180;
+        rotateCode = ROTATE_180;
         break;
     case 270:
-        rotateCode = cv::ROTATE_90_COUNTERCLOCKWISE;
+        rotateCode = ROTATE_90_COUNTERCLOCKWISE;
         break;
     default:
-        std::cerr << "Error: Invalid angle. Use 90, 180, or 270." << std::endl;
-        return cv::Mat();
+        cerr << "Error: Invalid angle. Use 90, 180, or 270." << endl;
+        return Mat();
     }
 
-    cv::rotate(originalImage, processedImage, rotateCode);
-    std::cout << "Image rotated by " << angle << " degrees" << std::endl;
+    rotate(originalImage, processedImage, rotateCode);
+    cout << "Image rotated by " << angle << " degrees" << endl;
     return processedImage;
 }
 
 // Flip Image
-cv::Mat ImageManipulator::flipImage(int flipCode) {
+Mat ImageManipulator::flipImage(int flipCode) {
     if (originalImage.empty()) {
-        std::cerr << "Error: No image loaded!" << std::endl;
-        return cv::Mat();
+        cerr << "Error: No image loaded!" << endl;
+        return Mat();
     }
 
     // flipCode: 0 = vertical, 1 = horizontal, -1 = both
-    cv::flip(originalImage, processedImage, flipCode);
+    flip(originalImage, processedImage, flipCode);
 
-    std::string flipType;
+    string flipType;
     switch (flipCode) {
     case 0:
         flipType = "vertically";
@@ -162,17 +166,17 @@ cv::Mat ImageManipulator::flipImage(int flipCode) {
         flipType = "unknown";
     }
 
-    std::cout << "Image flipped " << flipType << std::endl;
+    cout << "Image flipped " << flipType << endl;
     return processedImage;
 }
 
 // Get Original Image
-cv::Mat ImageManipulator::getOriginalImage() const {
+Mat ImageManipulator::getOriginalImage() const {
     return originalImage;
 }
 
 // Get Processed Image
-cv::Mat ImageManipulator::getProcessedImage() const {
+Mat ImageManipulator::getProcessedImage() const {
     return processedImage;
 }
 
@@ -182,18 +186,18 @@ bool ImageManipulator::isImageLoaded() const {
 }
 
 // Save Processed Image
-bool ImageManipulator::saveImage(const std::string& outputPath) const {
+bool ImageManipulator::saveImage(const string& outputPath) const {
     if (processedImage.empty()) {
-        std::cerr << "Error: No processed image to save!" << std::endl;
+        cerr << "Error: No processed image to save!" << endl;
         return false;
     }
 
-    bool success = cv::imwrite(outputPath, processedImage);
+    bool success = imwrite(outputPath, processedImage);
     if (success) {
-        std::cout << "Image saved to " << outputPath << std::endl;
+        cout << "Image saved to " << outputPath << endl;
     }
     else {
-        std::cerr << "Error: Could not save image!" << std::endl;
+        cerr << "Error: Could not save image!" << endl;
     }
     return success;
 }
