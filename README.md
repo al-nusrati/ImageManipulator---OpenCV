@@ -1,4 +1,5 @@
 # Image Manipulation using OpenCV - Assignment 2
+
 ## 📋 Overview
 
 This project implements an image manipulation system using OpenCV and C++. It demonstrates fundamental image processing operations including contrast enhancement, rotation, and flipping using Object-Oriented Programming principles.
