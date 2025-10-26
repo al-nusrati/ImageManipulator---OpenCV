@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="ImageManipulator - OpenCV/ImageManipulator - OpenCV.vcxproj" />
+  <Project Path="ImageManipulator - OpenCV/ImageManipulator - OpenCV.vcxproj" Id="a045cade-7f62-4032-965f-bc5f0e81a753" />
 </Solution>
